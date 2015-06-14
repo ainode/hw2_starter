@@ -145,14 +145,26 @@ int cunittester()
 {
    CU_pSuite pSuite = NULL;
    CU_pSuite pSuite2 = NULL;
+   
+   //added code (boilerplate)
+CU_pSuite pSuite5 = NULL; // replace N with the test number
+/* add a suite to the registry */
 
+/* You don't necessarily have to use the same init and clean functions for
+ * each suite. You can specify the function names in the next line:
+ */
+pSuite5 = CU_add_suite("Suite_5", init_suite, clean_suite);
+if (NULL == pSuite5) {
+   CU_cleanup_registry();
+   return CU_get_error();
+}
    /* initialize the CUnit test registry */
    if (CUE_SUCCESS != CU_initialize_registry())
       return CU_get_error();
 
    /* add a suite to the registry */
    pSuite = CU_add_suite("Suite_1", init_suite, clean_suite);
-   if (NULL == pSuite) {
+   if (NULL == pSuite5) {
       CU_cleanup_registry();
       return CU_get_error();
    }
